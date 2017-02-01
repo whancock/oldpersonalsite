@@ -1,0 +1,30 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="my-app.html"></head><body><dom-module id="wh-gallery">
+
+	<template>
+
+		<style>
+			.inner-image {
+			  position: absolute;
+			  padding-top: 12.2%;
+			  padding-left: 16.5%;
+			}
+
+			.container {
+				position: relative;
+			}
+
+		</style>
+
+		<iron-ajax auto="" url="../data/photos.json" handle-as="json" on-response="responseHandler"></iron-ajax>
+
+		<div class="container" style="margin: 0 20px; width: 80%; box-shadow: 0 0 10px #ccc">
+			<img style="max-width: 68.5%" class="inner-image" src="/photos/{{photo}}">
+			<img style="max-width: 100%; position: absolute" src="/images/frame_gold_sm.png">
+		</div>
+
+	</template>
+
+	<script>Polymer({is:"wh-gallery",responseHandler:function(o,t){this.photos=t.xhr.response,this.photo=this.randomImage(this.photos)},randomImage:function(o){return o[Math.floor(Math.random()*o.length)]}});</script>
+
+</dom-module>
+</body></html>

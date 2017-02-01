@@ -1,0 +1,81 @@
+<html><head></head><body><dom-module id="wh-main">
+
+	<template>
+
+		<style include="iron-flex iron-flex-alignment">
+
+			:host {
+				display: block;
+				--app-primary-color: #4285f4;
+				--app-secondary-color: black;
+				color: #333;
+			}
+
+			.left-nav-links a {
+				color: black;
+				text-decoration: none;
+				text-transform: uppercase;
+				font-weight: 500;
+				font-size: 12px;
+			}
+
+			.route-selector a.iron-selected {
+				font-weight: 600;
+				color: #ff6600;
+			}
+
+
+
+		</style>
+
+		<app-location route="{{route}}"></app-location>
+		<app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+		<app-drawer-layout fullbleed="">
+
+			
+			<app-drawer>
+
+				<div class="layout vertical center" style="padding-top: 100px">
+
+					<img style="border-radius: 50%; width: 80px; height: 80px" src="/images/porcelain.jpg">
+
+					<span style="font-weight: 100; font-size: 32px; margin: 20px 0">Will Hancock</span>
+
+					<div class="layout vertical center left-nav-links">
+
+						<iron-selector selected="[[page]]" attr-for-selected="name" role="navigation" class="vertical layout center route-selector">
+							<a name="resume" href="/resume">cv</a>
+							<a name="publications" href="/publications">publications</a>
+							<a name="gallery" href="/gallery">gallery</a>
+						</iron-selector>
+
+						<a href="https://github.com/whancock" target="_blank">github</a>
+
+					</div>
+
+				</div>
+
+			</app-drawer>
+
+			
+			<app-header-layout has-scrolling-region="">
+
+				<iron-pages style="height: 100%; width: 100%" role="main" selected="[[page]]" attr-for-selected="name">
+					<wh-resume name="resume"></wh-resume>
+					<wh-publications name="publications"></wh-publications>
+					<wh-gallery name="gallery"></wh-gallery>
+					<wh-resumeraw name="resumeraw"></wh-resumeraw>
+					<wh-view404 name="view404"></wh-view404>
+				</iron-pages>
+
+			</app-header-layout>
+
+		</app-drawer-layout>
+
+	</template>
+
+	<script>Polymer({is:"wh-main",properties:{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"}},observers:["_routePageChanged(routeData.page)"],_routePageChanged:function(e){this.page=e||"resume"},_pageChanged:function(e){this.importHref(this.resolveUrl(e+".html"),null,this._view404,!0)},_view404:function(){console.log("419 is not a game"),this.page="view404"}});</script>
+
+</dom-module>
+</body></html>
