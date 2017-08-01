@@ -15,11 +15,15 @@
 
 		</style>
 
-		<iron-ajax auto="" url="../data/photos.json" handle-as="json" on-response="responseHandler"></iron-ajax>
+		<div style="max-width: 1400px;">
 
-		<div class="container" style="margin: 0 20px; width: 80%; box-shadow: 0 0 10px #ccc">
-			<img style="max-width: 68.5%" class="inner-image" src="/photos/{{photo}}">
-			<img style="max-width: 100%; position: absolute" src="/images/frame_gold_sm.png">
+			<iron-ajax auto="" url="../data/photos.json" handle-as="json" on-response="responseHandler"></iron-ajax>
+
+			<div class="container" style="margin: 0 20px; width: 80%; box-shadow: 0 0 10px #ccc">
+				<img style="max-width: 68.5%" class="inner-image" src="/photos/{{photo}}">
+				<img style="max-width: 100%; position: absolute" src="/images/frame_gold_sm.png">
+			</div>
+
 		</div>
 
 	</template>
